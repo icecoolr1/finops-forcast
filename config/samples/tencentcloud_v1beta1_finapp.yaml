@@ -1,0 +1,18 @@
+apiVersion: tencentcloud.tencentcloud.com/v1beta1
+kind: FinApp
+metadata:
+  labels:
+    app.kubernetes.io/name: finapp
+    app.kubernetes.io/instance: finapp-sample
+    app.kubernetes.io/part-of: project
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: project
+  name: finapp-sample
+#  finalizers:
+#    - finalizer.tencentcloud.com
+spec:
+  deploymentConfig:
+    replicas: 3
+    image: tencentyun/finapp:latest
+  prometheusConfig:
+    endpoint: /metrics

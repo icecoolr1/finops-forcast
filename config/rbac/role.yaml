@@ -1,0 +1,32 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - tencentcloud.tencentcloud.com
+  resources:
+  - finapps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - tencentcloud.tencentcloud.com
+  resources:
+  - finapps/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - tencentcloud.tencentcloud.com
+  resources:
+  - finapps/status
+  verbs:
+  - get
+  - patch
+  - update

@@ -1,0 +1,83 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.12.0
+  name: finapps.tencentcloud.tencentcloud.com
+spec:
+  group: tencentcloud.tencentcloud.com
+  names:
+    kind: FinApp
+    listKind: FinAppList
+    plural: finapps
+    singular: finapp
+  scope: Namespaced
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: FinApp is the Schema for the finapps API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: FinAppSpec defines the desired state of FinApp
+            properties:
+              deploymentConfig:
+                description: DeploymentConfig holds the configuration for the deployment
+                properties:
+                  image:
+                    type: string
+                  replicas:
+                    description: Add fields for deployment configuration
+                    format: int32
+                    type: integer
+                type: object
+              prometheusConfig:
+                description: PrometheusConfig holds the configuration for Prometheus
+                properties:
+                  endpoint:
+                    description: Add fields for Prometheus configuration
+                    type: string
+                type: object
+            type: object
+          status:
+            description: FinAppStatus defines the observed state of FinApp
+            properties:
+              lastPredictionTime:
+                format: date-time
+                type: string
+              predictions:
+                description: Predictions holds the hourly resource predictions
+                items:
+                  description: ResourcePrediction defines the resource prediction
+                    for a specific hour
+                  properties:
+                    cpu:
+                      type: string
+                    hour:
+                      type: integer
+                    memory:
+                      type: string
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        - status
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
