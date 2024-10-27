@@ -56,7 +56,7 @@ type ResourcePrediction struct {
 
 // FinAppStatus defines the observed state of FinApp
 type FinAppStatus struct {
-	Cronjob            string       `json:"cronjob,omitempty"`
+	Cronjob            bool         `json:"cronjob,omitempty"`
 	LastPredictionTime *metav1.Time `json:"lastPredictionTime,omitempty"`
 	// Predictions holds the hourly resource predictions
 	Predictions []ResourcePrediction `json:"predictions,omitempty"`
@@ -70,8 +70,8 @@ type FinApp struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   FinAppSpec   `json:"spec"`
-	Status FinAppStatus `json:"status"`
+	Spec   FinAppSpec   `json:"spec,omitempty"`
+	Status FinAppStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
